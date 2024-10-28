@@ -17,6 +17,10 @@ class Database {
     this.players = [];
   }
 
+  getWinners() {
+    return this.players.map(({ name, wins }) => ({ name, wins }));
+  }
+
   getUserByName(userName: string) {
     return this.players.find(({ name }) => name === userName);
   }

@@ -1,6 +1,7 @@
 import { RawData, WebSocket } from "ws";
 import { WS_MESSAGE_TYPE, WsMessage } from "./types";
 import { register } from "./controllers/register";
+import { updateWinners } from "./controllers/updateWinners";
 
 const messageHandler = async (
   message: RawData,
@@ -13,8 +14,7 @@ const messageHandler = async (
     switch (type) {
       case WS_MESSAGE_TYPE.REGISTER:
         register(parsedData, socket);
-        break;
-      case WS_MESSAGE_TYPE.UPDATE_WINNERS:
+        updateWinners(socket);
         break;
       case WS_MESSAGE_TYPE.CREATE_ROOM:
         break;
