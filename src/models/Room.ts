@@ -10,6 +10,9 @@ class Room {
   }
 
   addPlayerToRoom(player: Player) {
+    if (this.players.length > 1) {
+      throw new Error(`The room ${this.id} is already full`);
+    }
     if (!this.hasPlayerInRoom(player.id)) {
       this.players.push(player);
     } else {

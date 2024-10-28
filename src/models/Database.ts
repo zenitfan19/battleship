@@ -1,6 +1,7 @@
 import { WebSocket } from "ws";
 import { Player, PlayerInput } from "./Player";
 import { Room } from "./Room";
+import { Game } from "./Game";
 
 class Database {
   static database: Database;
@@ -16,10 +17,12 @@ class Database {
   players: Player[];
   connections: Map<string, WebSocket>;
   rooms: Room[];
+  games: Game[];
 
   constructor() {
     this.players = [];
     this.rooms = [];
+    this.games = [];
     this.connections = new Map();
   }
 
@@ -113,6 +116,14 @@ class Database {
     if (player) {
       this.getRoomById(roomId)?.addPlayerToRoom(player);
     }
+  }
+
+  createGame(player1: Player, player2: Player) {
+    const newGame = new Game(player1, player2);
+
+    this.games.push(newGame);
+
+    return newGame;
   }
 }
 
