@@ -102,6 +102,18 @@ class Database {
 
     this.rooms.push(newRoom);
   }
+
+  getRoomById(roomId: string) {
+    return this.rooms.find(({ id }) => id === roomId);
+  }
+
+  addPlayerToRoom(roomId: string, socket: WebSocket) {
+    const player = this.getPlayerByConnection(socket);
+
+    if (player) {
+      this.getRoomById(roomId)?.addPlayerToRoom(player);
+    }
+  }
 }
 
 export { Database };

@@ -2,6 +2,7 @@ import { RawData, WebSocket } from "ws";
 import { WS_MESSAGE_TYPE, WsMessage } from "./types";
 import { register } from "./controllers/register";
 import { createRoom } from "./controllers/createRoom";
+import { addPlayerToRoom } from "./controllers/addPlayerToRoom";
 
 const messageHandler = async (
   message: RawData,
@@ -23,6 +24,7 @@ const messageHandler = async (
         createRoom(socket);
         break;
       case WS_MESSAGE_TYPE.ADD_USER_TO_ROOM:
+        addPlayerToRoom(parsedData, socket);
         break;
       case WS_MESSAGE_TYPE.CREATE_GAME:
         break;

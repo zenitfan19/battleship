@@ -10,7 +10,15 @@ class Room {
   }
 
   addPlayerToRoom(player: Player) {
-    this.players.push(player);
+    if (!this.hasPlayerInRoom(player.id)) {
+      this.players.push(player);
+    } else {
+      throw new Error(`Player ${player.name} already in room`);
+    }
+  }
+
+  hasPlayerInRoom(playerId: string) {
+    return this.players.some(({ id }) => id === playerId);
   }
 }
 
