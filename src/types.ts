@@ -13,4 +13,11 @@ enum WS_MESSAGE_TYPE {
   FINISH = "finish",
 }
 
+type WsMessage = {
+  type: WS_MESSAGE_TYPE;
+  data: string;
+  id: number;
+};
+
 export { WS_MESSAGE_TYPE };
+export type { WsMessage };
