@@ -91,6 +91,17 @@ class Database {
     player?.setOffline();
     this.connections.delete(playerId);
   }
+
+  createRoom(socket: WebSocket) {
+    const newRoom = new Room();
+    const player = this.getPlayerByConnection(socket);
+
+    if (player) {
+      newRoom.addPlayerToRoom(player);
+    }
+
+    this.rooms.push(newRoom);
+  }
 }
 
 export { Database };

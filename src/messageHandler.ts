@@ -1,6 +1,7 @@
 import { RawData, WebSocket } from "ws";
 import { WS_MESSAGE_TYPE, WsMessage } from "./types";
 import { register } from "./controllers/register";
+import { createRoom } from "./controllers/createRoom";
 
 const messageHandler = async (
   message: RawData,
@@ -8,7 +9,7 @@ const messageHandler = async (
 ): Promise<void> => {
   try {
     const { type, data, id }: WsMessage = JSON.parse(message.toString());
-    const parsedData = JSON.parse(data);
+    const parsedData = JSON.parse(data || "null");
 
     console.log(
       `\x1b[38;2;255;223;0m Message type: ${type} with data: ${data} \x1b[0m`
@@ -19,6 +20,7 @@ const messageHandler = async (
         register(parsedData, socket);
         break;
       case WS_MESSAGE_TYPE.CREATE_ROOM:
+        createRoom(socket);
         break;
       case WS_MESSAGE_TYPE.ADD_USER_TO_ROOM:
         break;
