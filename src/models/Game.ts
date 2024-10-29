@@ -1,3 +1,4 @@
+import { Board } from "./Board";
 import { Player } from "./Player";
 import { Ship } from "./Ship";
 
@@ -5,6 +6,7 @@ class Game {
   id: string;
   players: Player[];
   ships: Map<string, Ship[]>;
+  boards: Map<string, Board>;
   currentPlayerId: string;
   currentEnemyId: string;
 
@@ -12,6 +14,7 @@ class Game {
     this.id = crypto.randomUUID();
     this.players = [player1, player2];
     this.ships = new Map();
+    this.boards = new Map();
     this.currentPlayerId = player1.id;
     this.currentEnemyId = player2.id;
   }
@@ -30,6 +33,16 @@ class Game {
   }
 
   attack(x: number, y: number) {
+    const cell = this.boards.get(this.currentEnemyId)?.cells[x][y];
+
+    if (cell?.isChecked) {
+      throw new Error(
+        `The cell with position x=${x} y=${y} is already checked`
+      );
+    }
+
+    cell?.setChecked();
+
     const hittedShip = this.ships
       .get(this.currentEnemyId)
       ?.find((ship) => ship.attackShip(x, y));
@@ -43,6 +56,7 @@ class Game {
 
   placeShipsForPlayer(playerId: string, ships: Ship[]) {
     this.ships.set(playerId, ships);
+    this.boards.set(playerId, new Board());
   }
 
   getPlayerShips(playerId: string) {

@@ -1,14 +1,11 @@
+import { Coordinates } from "../types";
+
 enum ShipType {
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
   HUGE = "huge",
 }
-
-type Coordinates = {
-  x: number;
-  y: number;
-};
 
 class Ship {
   id: string;

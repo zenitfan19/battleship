@@ -25,5 +25,10 @@ type WsMessage = {
   id: number;
 };
 
+type Coordinates = {
+  x: number;
+  y: number;
+};
+
 export { WS_MESSAGE_TYPE, AttackStatus };
-export type { WsMessage };
+export type { WsMessage, Coordinates };
