@@ -2,6 +2,7 @@ import { WebSocket } from "ws";
 import { Player, PlayerInput } from "./Player";
 import { Room } from "./Room";
 import { Game } from "./Game";
+import { Ship } from "./Ship";
 
 class Database {
   static database: Database;
@@ -110,6 +111,10 @@ class Database {
     return this.rooms.find(({ id }) => id === roomId);
   }
 
+  getGameById(gameId: string) {
+    return this.games.find(({ id }) => id === gameId);
+  }
+
   addPlayerToRoom(roomId: string, socket: WebSocket) {
     const player = this.getPlayerByConnection(socket);
 
@@ -124,6 +129,10 @@ class Database {
     this.games.push(newGame);
 
     return newGame;
+  }
+
+  addShipsForPlayer(gameId: string, ships: Ship[], playerId: string) {
+    this.getGameById(gameId)?.placeShipsForPlayer(playerId, ships);
   }
 }
 

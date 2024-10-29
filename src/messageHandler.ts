@@ -3,6 +3,7 @@ import { WS_MESSAGE_TYPE, WsMessage } from "./types";
 import { register } from "./controllers/register";
 import { createRoom } from "./controllers/createRoom";
 import { addPlayerToRoom } from "./controllers/addPlayerToRoom";
+import { addShipsForPlayer } from "./controllers/addShipsForPlayer";
 
 const messageHandler = async (
   message: RawData,
@@ -26,9 +27,8 @@ const messageHandler = async (
       case WS_MESSAGE_TYPE.ADD_USER_TO_ROOM:
         addPlayerToRoom(parsedData, socket);
         break;
-      case WS_MESSAGE_TYPE.CREATE_GAME:
-        break;
       case WS_MESSAGE_TYPE.ADD_SHIPS:
+        addShipsForPlayer(parsedData);
         break;
       case WS_MESSAGE_TYPE.START_GAME:
         break;
