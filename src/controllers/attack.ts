@@ -31,22 +31,63 @@ const attack = ({ gameId, indexPlayer, x, y }: AttackInput) => {
     status = AttackStatus.MISS;
   }
 
-  game?.players.forEach(({ id }) => {
-    db.connections.get(id)?.send(
-      JSON.stringify({
-        type: WS_MESSAGE_TYPE.ATTACK,
-        data: JSON.stringify({
-          position: {
-            x,
-            y,
-          },
-          currentPlayer: indexPlayer,
-          status,
-        }),
-        id: 0,
-      })
-    );
-  });
+  if (status === AttackStatus.KILLLED) {
+    const surroundingCells = hittedShip?.getSurroundingCells() ?? [];
+
+    game.setSurroundingCoordinatesChecked(surroundingCells);
+
+    game?.players.forEach(({ id }) => {
+      hittedShip?.getShipCells().forEach((shipCoordinate) => {
+        db.connections.get(id)?.send(
+          JSON.stringify({
+            type: WS_MESSAGE_TYPE.ATTACK,
+            data: JSON.stringify({
+              position: {
+                x: shipCoordinate.x,
+                y: shipCoordinate.y,
+              },
+              currentPlayer: indexPlayer,
+              status: AttackStatus.KILLLED,
+            }),
+            id: 0,
+          })
+        );
+      });
+      surroundingCells.forEach((surroundingCoordinate) => {
+        db.connections.get(id)?.send(
+          JSON.stringify({
+            type: WS_MESSAGE_TYPE.ATTACK,
+            data: JSON.stringify({
+              position: {
+                x: surroundingCoordinate.x,
+                y: surroundingCoordinate.y,
+              },
+              currentPlayer: indexPlayer,
+              status: AttackStatus.MISS,
+            }),
+            id: 0,
+          })
+        );
+      });
+    });
+  } else {
+    game?.players.forEach(({ id }) => {
+      db.connections.get(id)?.send(
+        JSON.stringify({
+          type: WS_MESSAGE_TYPE.ATTACK,
+          data: JSON.stringify({
+            position: {
+              x,
+              y,
+            },
+            currentPlayer: indexPlayer,
+            status,
+          }),
+          id: 0,
+        })
+      );
+    });
+  }
 
   sendNextTurn(gameId);
 };

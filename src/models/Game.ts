@@ -1,3 +1,4 @@
+import { Coordinates } from "../types";
 import { Board } from "./Board";
 import { Player } from "./Player";
 import { Ship } from "./Ship";
@@ -52,6 +53,14 @@ class Game {
     }
 
     return hittedShip;
+  }
+
+  setSurroundingCoordinatesChecked(coordinates: Coordinates[]) {
+    coordinates.forEach(({ x, y }) => {
+      const cell = this.boards.get(this.currentEnemyId)?.cells[x][y];
+
+      cell?.setChecked();
+    });
   }
 
   placeShipsForPlayer(playerId: string, ships: Ship[]) {
