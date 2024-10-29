@@ -4,6 +4,7 @@ import { register } from "./controllers/register";
 import { createRoom } from "./controllers/createRoom";
 import { addPlayerToRoom } from "./controllers/addPlayerToRoom";
 import { addShipsForPlayer } from "./controllers/addShipsForPlayer";
+import { attack } from "./controllers/attack";
 
 const messageHandler = async (
   message: RawData,
@@ -30,13 +31,10 @@ const messageHandler = async (
       case WS_MESSAGE_TYPE.ADD_SHIPS:
         addShipsForPlayer(parsedData);
         break;
-      case WS_MESSAGE_TYPE.START_GAME:
-        break;
       case WS_MESSAGE_TYPE.ATTACK:
+        attack(parsedData);
         break;
       case WS_MESSAGE_TYPE.RANDOM_ATTACK:
-        break;
-      case WS_MESSAGE_TYPE.TURN:
         break;
       case WS_MESSAGE_TYPE.FINISH:
         break;

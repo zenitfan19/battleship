@@ -1,5 +1,6 @@
 import { Database } from "../models/Database";
 import { WS_MESSAGE_TYPE } from "../types";
+import { sendNextTurn } from "./sendNextTurn";
 
 const db = Database.getDBInstance();
 
@@ -27,6 +28,8 @@ const startGame = (gameId: string) => {
         })
       );
     });
+
+    sendNextTurn(gameId);
   }
 };
 

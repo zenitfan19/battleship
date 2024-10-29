@@ -13,11 +13,17 @@ enum WS_MESSAGE_TYPE {
   FINISH = "finish",
 }
 
+enum AttackStatus {
+  MISS = "miss",
+  KILLLED = "killed",
+  SHOT = "shot",
+}
+
 type WsMessage = {
   type: WS_MESSAGE_TYPE;
   data: string;
   id: number;
 };
 
-export { WS_MESSAGE_TYPE };
+export { WS_MESSAGE_TYPE, AttackStatus };
 export type { WsMessage };

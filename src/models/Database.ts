@@ -100,6 +100,14 @@ class Database {
     const newRoom = new Room();
     const player = this.getPlayerByConnection(socket);
 
+    const isPlayerAlreadyInRoom = this.rooms.some(({ players }) =>
+      players.some(({ id }) => id === player?.id)
+    );
+
+    if (isPlayerAlreadyInRoom) {
+      throw new Error(`Player ${player?.name} is already in room`);
+    }
+
     if (player) {
       newRoom.addPlayerToRoom(player);
     }

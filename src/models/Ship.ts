@@ -31,6 +31,38 @@ class Ship {
     this.length = length;
     this.hits = 0;
   }
+
+  attackShip(x: number, y: number) {
+    const isHitted = this.isHitted(x, y);
+
+    if (isHitted) {
+      this.hits += 1;
+
+      return true;
+    }
+
+    return false;
+  }
+
+  isHitted(x: number, y: number) {
+    if (this.direction) {
+      return (
+        this.coordinates.x === x &&
+        this.coordinates.y <= y &&
+        y < this.coordinates.y + this.length
+      );
+    } else {
+      return (
+        this.coordinates.y === y &&
+        this.coordinates.x <= x &&
+        x < this.coordinates.x + this.length
+      );
+    }
+  }
+
+  get isKilled() {
+    return this.hits === this.length;
+  }
 }
 
 export { Ship, ShipType };
