@@ -19,6 +19,8 @@ const createGame = (roomId: string) => {
         })
       );
     });
+
+    db.deleteRoom(roomId);
   }
 };
 

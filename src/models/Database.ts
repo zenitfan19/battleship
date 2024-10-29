@@ -139,6 +139,14 @@ class Database {
     return newGame;
   }
 
+  deleteRoom(roomId: string) {
+    this.rooms = this.rooms.filter(({ id }) => id !== roomId);
+  }
+
+  deleteGame(gameId: string) {
+    this.games = this.games.filter(({ id }) => id !== gameId);
+  }
+
   addShipsForPlayer(gameId: string, ships: Ship[], playerId: string) {
     this.getGameById(gameId)?.placeShipsForPlayer(playerId, ships);
   }

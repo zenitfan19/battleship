@@ -71,6 +71,18 @@ class Game {
   getPlayerShips(playerId: string) {
     return this.ships.get(playerId);
   }
+
+  get areAllEnemyShipsKilled() {
+    return this.ships
+      .get(this.currentEnemyId)
+      ?.every(({ isKilled }) => isKilled);
+  }
+
+  addWinForCurrentPlayer() {
+    const winner = this.players.find(({ id }) => id === this.currentPlayerId);
+
+    winner?.incrementWins();
+  }
 }
 
 export { Game };

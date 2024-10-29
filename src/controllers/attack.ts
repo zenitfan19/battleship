@@ -1,5 +1,6 @@
 import { Database } from "../models/Database";
 import { AttackStatus, WS_MESSAGE_TYPE } from "../types";
+import { checkWinConditions } from "./checkWinConditions";
 import { sendNextTurn } from "./sendNextTurn";
 
 type AttackInput = {
@@ -69,6 +70,8 @@ const attack = ({ gameId, indexPlayer, x, y }: AttackInput) => {
           })
         );
       });
+
+      checkWinConditions(gameId, indexPlayer);
     });
   } else {
     game?.players.forEach(({ id }) => {

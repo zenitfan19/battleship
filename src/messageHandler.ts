@@ -38,8 +38,6 @@ const messageHandler = async (
       case WS_MESSAGE_TYPE.RANDOM_ATTACK:
         randomAttack(parsedData);
         break;
-      case WS_MESSAGE_TYPE.FINISH:
-        break;
       default:
         console.error("Invalid message type");
     }
