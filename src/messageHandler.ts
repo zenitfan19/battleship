@@ -5,6 +5,7 @@ import { createRoom } from "./controllers/createRoom";
 import { addPlayerToRoom } from "./controllers/addPlayerToRoom";
 import { addShipsForPlayer } from "./controllers/addShipsForPlayer";
 import { attack } from "./controllers/attack";
+import { randomAttack } from "./controllers/randomAttack";
 
 const messageHandler = async (
   message: RawData,
@@ -35,6 +36,7 @@ const messageHandler = async (
         attack(parsedData);
         break;
       case WS_MESSAGE_TYPE.RANDOM_ATTACK:
+        randomAttack(parsedData);
         break;
       case WS_MESSAGE_TYPE.FINISH:
         break;

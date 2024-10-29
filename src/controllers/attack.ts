@@ -93,3 +93,4 @@ const attack = ({ gameId, indexPlayer, x, y }: AttackInput) => {
 };
 
 export { attack };
+export type { AttackInput };
