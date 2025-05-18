@@ -10,8 +10,8 @@ const randomAttack = ({ gameId, indexPlayer }: RandomAttackInput) => {
   const game = db.getGameById(gameId);
 
   const notCheckedCoordinated: Coordinates[] = [];
-  game?.boards.get(indexPlayer)?.cells.forEach((row, x) =>
-    row.forEach((cell, y) => {
+  game?.boards.get(indexPlayer)?.cells.forEach((row) =>
+    row.forEach((cell) => {
       if (!cell.isChecked) {
         notCheckedCoordinated.push(cell.coordinates);
       }

@@ -12,7 +12,7 @@ const messageHandler = async (
   socket: WebSocket
 ): Promise<void> => {
   try {
-    const { type, data, id }: WsMessage = JSON.parse(message.toString());
+    const { type, data }: WsMessage = JSON.parse(message.toString());
     const parsedData = JSON.parse(data || "null");
 
     console.log(

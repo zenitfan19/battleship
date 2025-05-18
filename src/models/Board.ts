@@ -1,4 +1,3 @@
-import { Coordinates } from "../types";
 import { Cell } from "./Cell";
 
 class Board {

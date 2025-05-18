@@ -49,7 +49,7 @@ class Database {
   getPlayerByConnection(connection: WebSocket) {
     const [playerId] =
       Array.from(this.connections.entries()).find(
-        ([_, userConnection]) => userConnection === connection
+        ([, userConnection]) => userConnection === connection
       ) ?? [];
     return this.getPlayerById(playerId ?? "");
   }
