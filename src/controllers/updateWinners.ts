@@ -7,7 +7,7 @@ const updateWinners = () => {
   const winners = db.getWinners();
 
   db.connections.forEach((connection) => {
-    connection.send(
+    connection?.send(
       JSON.stringify({
         type: WS_MESSAGE_TYPE.UPDATE_WINNERS,
         data: JSON.stringify(winners),

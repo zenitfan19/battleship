@@ -11,6 +11,7 @@ enum WS_MESSAGE_TYPE {
   RANDOM_ATTACK = "randomAttack",
   TURN = "turn",
   FINISH = "finish",
+  SINGLE_PLAY = "single_play", // Added for single play with bot
 }
 
 enum AttackStatus {

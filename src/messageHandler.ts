@@ -6,6 +6,7 @@ import { addPlayerToRoom } from "./controllers/addPlayerToRoom";
 import { addShipsForPlayer } from "./controllers/addShipsForPlayer";
 import { attack } from "./controllers/attack";
 import { randomAttack } from "./controllers/randomAttack";
+import { singlePlay } from "./controllers/singlePlay";
 
 const messageHandler = async (
   message: RawData,
@@ -37,6 +38,9 @@ const messageHandler = async (
         break;
       case WS_MESSAGE_TYPE.RANDOM_ATTACK:
         randomAttack(parsedData);
+        break;
+      case WS_MESSAGE_TYPE.SINGLE_PLAY:
+        singlePlay(socket);
         break;
       default:
         console.error("Invalid message type");

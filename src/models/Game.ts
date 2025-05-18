@@ -10,14 +10,16 @@ class Game {
   boards: Map<string, Board>;
   currentPlayerId: string;
   currentEnemyId: string;
+  isSinglePlayerMode: boolean;
 
-  constructor(player1: Player, player2: Player) {
+  constructor(player1: Player, player2: Player, isSinglePlayerMode = false) {
     this.id = crypto.randomUUID();
     this.players = [player1, player2];
     this.ships = new Map();
     this.boards = new Map();
     this.currentPlayerId = player1.id;
     this.currentEnemyId = player2.id;
+    this.isSinglePlayerMode = isSinglePlayerMode;
   }
 
   get isGameReady() {

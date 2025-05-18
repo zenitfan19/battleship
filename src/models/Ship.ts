@@ -92,8 +92,8 @@ class Ship {
       directions.forEach((dir) => {
         const x = cell.x + dir.dx;
         const y = cell.y + dir.dy;
-        if (x >= 0 && y >= 0) {
-          // Ensure coordinates are non-negative
+        // Add bounds check here (board is 10x10, 0-based)
+        if (x >= 0 && x < 10 && y >= 0 && y < 10) {
           const key = `${x},${y}`;
           surroundingCells.add(key);
         }

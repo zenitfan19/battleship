@@ -2,6 +2,7 @@ import { Database } from "../models/Database";
 import { AttackStatus, WS_MESSAGE_TYPE } from "../types";
 import { checkWinConditions } from "./checkWinConditions";
 import { sendNextTurn } from "./sendNextTurn";
+import { randomAttack } from "./randomAttack";
 
 type AttackInput = {
   gameId: string;
@@ -93,6 +94,20 @@ const attack = ({ gameId, indexPlayer, x, y }: AttackInput) => {
   }
 
   sendNextTurn(gameId);
+
+  if (game.isSinglePlayerMode) {
+    const bot = game.players.find((p) => p.name === "Bot");
+    if (
+      bot &&
+      game.currentPlayerId === bot.id &&
+      !game.areAllEnemyShipsKilled
+    ) {
+      const botDelay = 500 + Math.floor(Math.random() * 1000);
+      setTimeout(() => {
+        randomAttack({ gameId, indexPlayer: bot.id });
+      }, botDelay);
+    }
+  }
 };
 
 export { attack };

@@ -131,8 +131,8 @@ class Database {
     }
   }
 
-  createGame(player1: Player, player2: Player) {
-    const newGame = new Game(player1, player2);
+  createGame(player1: Player, player2: Player, isSinglePlayerMode = false) {
+    const newGame = new Game(player1, player2, isSinglePlayerMode);
 
     this.games.push(newGame);
 
