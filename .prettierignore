@@ -1,0 +1,8 @@
+node_modules
+front
+dist
+coverage
+build
+.git
+.github
+.vscode
